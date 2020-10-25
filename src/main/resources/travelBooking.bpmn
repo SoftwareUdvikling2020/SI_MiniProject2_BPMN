@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1b73xrp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <bpmn:process id="TravelBooking" name="TravelBooking" isExecutable="true" camunda:versionTag="TravelBooking_Tag">
+    <bpmn:startEvent id="StartEvent_1" name="Travel Request Received" camunda:initiator="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="countryColor" label="item" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0r1msyz</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="purchase-completed" name="approved">
+      <bpmn:incoming>SequenceFlow9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow9" sourceRef="Operation3" targetRef="purchase-completed" />
+    <bpmn:serviceTask id="Operation3" name="Proceed Request" camunda:asyncAfter="true" camunda:type="external" camunda:topic="testy">
+      <bpmn:incoming>Flow_1knyl3x</bpmn:incoming>
+      <bpmn:incoming>Flow_0xp354o</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow9</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0r1msyz" sourceRef="StartEvent_1" targetRef="ColorGateway" />
+    <bpmn:exclusiveGateway id="ColorGateway" name="Color?">
+      <bpmn:incoming>Flow_0r1msyz</bpmn:incoming>
+      <bpmn:outgoing>Flow_1knyl3x</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1sd6xgt</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0ugzdik</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1knyl3x" name="isGreen" sourceRef="ColorGateway" targetRef="Operation3">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${countryColor == 'green'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_1d42o4b" name="not approved">
+      <bpmn:incoming>Flow_1sd6xgt</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1sd6xgt" name="isRed" sourceRef="ColorGateway" targetRef="Event_1d42o4b">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${countryColor == 'red'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Activity_126z3zp" name="Confirm ?" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:candidateUsers="amdin, demo, rasmus">
+      <bpmn:incoming>Flow_0ugzdik</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ssld4c</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0ugzdik" name="isYellow" sourceRef="ColorGateway" targetRef="Activity_126z3zp">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${countryColor == 'yellow'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0ssld4c" sourceRef="Activity_126z3zp" targetRef="Gateway_132ah6j" />
+    <bpmn:exclusiveGateway id="Gateway_132ah6j">
+      <bpmn:incoming>Flow_0ssld4c</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xp354o</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0gferxy</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0xp354o" sourceRef="Gateway_132ah6j" targetRef="Operation3">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_02co631" name="not approved">
+      <bpmn:incoming>Flow_0gferxy</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0gferxy" sourceRef="Gateway_132ah6j" targetRef="Event_02co631">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="TravelBooking">
+      <bpmndi:BPMNEdge id="Flow_0r1msyz_di" bpmnElement="Flow_0r1msyz">
+        <di:waypoint x="208" y="247" />
+        <di:waypoint x="295" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_06soxro_di" bpmnElement="SequenceFlow9">
+        <di:waypoint x="770" y="247" />
+        <di:waypoint x="902" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1knyl3x_di" bpmnElement="Flow_1knyl3x">
+        <di:waypoint x="345" y="247" />
+        <di:waypoint x="670" y="247" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="620" y="223" width="39" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sd6xgt_di" bpmnElement="Flow_1sd6xgt">
+        <di:waypoint x="320" y="222" />
+        <di:waypoint x="320" y="100" />
+        <di:waypoint x="902" y="100" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="855" y="83" width="29" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ugzdik_di" bpmnElement="Flow_0ugzdik">
+        <di:waypoint x="320" y="272" />
+        <di:waypoint x="320" y="380" />
+        <di:waypoint x="410" y="380" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="359" y="363" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ssld4c_di" bpmnElement="Flow_0ssld4c">
+        <di:waypoint x="510" y="380" />
+        <di:waypoint x="585" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xp354o_di" bpmnElement="Flow_0xp354o">
+        <di:waypoint x="610" y="355" />
+        <di:waypoint x="610" y="277" />
+        <di:waypoint x="670" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gferxy_di" bpmnElement="Flow_0gferxy">
+        <di:waypoint x="635" y="380" />
+        <di:waypoint x="902" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0ghuxro_di" bpmnElement="Operation3">
+        <dc:Bounds x="670" y="207" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0aapzzk_di" bpmnElement="purchase-completed">
+        <dc:Bounds x="902" y="229" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="896" y="270" width="47" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_132ah6j_di" bpmnElement="Gateway_132ah6j" isMarkerVisible="true">
+        <dc:Bounds x="585" y="355" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="229" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="272" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0xjetmi_di" bpmnElement="ColorGateway" isMarkerVisible="true">
+        <dc:Bounds x="295" y="222" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="334" y="263" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_02co631_di" bpmnElement="Event_02co631">
+        <dc:Bounds x="902" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="888" y="405" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1d42o4b_di" bpmnElement="Event_1d42o4b">
+        <dc:Bounds x="902" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="888" y="125" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_010v24h_di" bpmnElement="Activity_126z3zp">
+        <dc:Bounds x="410" y="340" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
