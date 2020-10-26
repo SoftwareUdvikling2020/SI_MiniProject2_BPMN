@@ -1,4 +1,4 @@
-# SI_MiniProject2_BPMN
+# System Integration Mini Project BPMN
 | Magnus Klitmose            |  Rasmus Lynge               | Mathias Kristensen |
 | :-------------:            |  :-------------:            | :-------------: |
 | cph-mk525@cphbusiness.dk   | cph-rlj173@cphbusiness.dk   | cph-mk523@cphbusiness.dk |
