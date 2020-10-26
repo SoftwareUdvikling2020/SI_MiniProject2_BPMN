@@ -13,6 +13,8 @@ For now, the program takes a 'countrycolor' as an input, and based on that it de
 * if green, it is always approved
 * if yellow, it requires human approval through a confirmation
 
+![png of camunda project](https://github.com/SoftwareUdvikling2020/SI_MiniProject2_BPMN/blob/main/src/main/resources/TravelBooking.PNG)
+
 ## Running this project:
 - Clone the project
 - Start your local Camunda  
@@ -24,5 +26,3 @@ In the current iteration of the model, the confirmation is given by claiming the
 
 
 
-
-![png of camunda project](https://github.com/SoftwareUdvikling2020/SI_MiniProject2_BPMN/blob/main/src/main/resources/TravelBooking.PNG)
