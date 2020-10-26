@@ -20,9 +20,9 @@ For now, the program takes a 'countrycolor' as an input, and based on that it de
 - Start your local Camunda  
 - Go to the src/main/recources and find the travelBooking.bpmn file. This file needs to be deployed on Camunda (You can use the camunda modeller for deployment, like in the class example)  
 - Run the main method with Intelij.
-- Start a task in local Camunda with a country color of red, yellow or green.
+- Start a task in local Camunda with a country color of red, yellow or green. 
 
-In the current iteration of the model, the confirmation is given by claiming the task. If the color is yellow the human task involves adding an 'approved' variable as a boolean in the form.   
+When the color is yellow, the flow will wait for human confirmation in the form of a task. In the current iteration of the model, the confirmation is given by claiming the task, adding an 'approved' boolean variable to the form, and submitting it. 
 
 
 
