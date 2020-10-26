@@ -1,7 +1,7 @@
 # System Integration Mini Project BPMN
 | Magnus Klitmose            |  Rasmus Lynge               | Mathias Kristensen |
 | :-------------:            |  :-------------:            | :-------------: |
-| cph-mk525@cphbusiness.dk   | cph-rlj173@cphbusiness.dk   | cph-mk523@cphbusiness.dk |
+| cph-mk525@cphbusiness.dk   | cph-rj173@cphbusiness.dk  | cph-mk523@cphbusiness.dk |
 
 ## Business Case
 Our project will be used by travel agencies or perhaps travel insurance companies. 
