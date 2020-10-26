@@ -20,6 +20,9 @@ For now, the program takes a 'countrycolor' as an input, and based on that it de
 - Run the main method with Intelij.
 - Start a task in local Camunda with a country color of red, yellow or green.
 
-In the current iteration of the model, the confirmation is given by claiming the task, and adding an 'approved' variable as a boolean in the form. 
+In the current iteration of the model, the confirmation is given by claiming the task. If th color is yellow the human task involves adding an 'approved' variable as a boolean in the form.   
 
 
+
+
+![png of camunda project](https://github.com/SoftwareUdvikling2020/SI_MiniProject2_BPMN/blob/main/src/main/resources/TravelBooking.PNG)
